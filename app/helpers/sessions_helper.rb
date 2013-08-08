@@ -23,6 +23,13 @@ module SessionsHelper
     user == current_user
   end
 
+  def signed_in_user
+    unless signed_in?
+      store_location
+      redirect_to signin_url, notice: "Please sign in."
+    end
+  end
+
   def sign_out
   	# Yuzhe edit: set the database record of remember_token to empty string. Very likely this is insecure. should study the hashing method.
   	#remember_token = User.encrypt(cookies[:remember_token])
